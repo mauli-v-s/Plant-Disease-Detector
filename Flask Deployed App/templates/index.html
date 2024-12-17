@@ -1,0 +1,109 @@
+<html>
+{% extends 'base.html' %}
+{% block pagetitle %}
+AI Engine
+{% endblock pagetitle %}
+
+{% block body %}
+<div>
+    <div class="container">
+        <!-- For demo purpose -->
+        <div class="row mb-5 text-center text-white">
+            <div class="col-lg-10 mx-auto">
+                <h1 class="display-4" style="padding-top: 2%; font-weight: 400; color: rgb(4, 54, 4);">
+                    <b>🍀AI Engine🍀</b>
+                </h1>
+                <p class="lead" style="font-weight: 500; color: black;">Let AI Engine Help You Detect Plant Disease</p>
+            </div>
+        </div>
+        <!-- End -->
+
+        <div class="row">
+            <div class="col mx-auto">
+                <div class="p-5 bg-white shadow rounded-lg" style="height: 95%;">
+                    <h5><b>Why is it necessary to detect disease in plants?</b></h5>
+                    <p>
+                        Plant diseases affect the growth of their respective species. In addition, some research gaps 
+                        are identified from which to obtain greater transparency for detecting diseases in plants, 
+                        even before their symptoms appear clearly. Diagnosis is one of the most important aspects of 
+                        a plant pathologist's training. Without proper identification of the disease and the 
+                        disease-causing agent, disease control measures can be a waste of time and money and can lead 
+                        to further plant losses. Proper disease diagnosis is necessary.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col mx-auto">
+                <div class="p-5 bg-white shadow rounded-lg" style="height: 95%;">
+                    <!-- Image Preview ABOVE the input -->
+                    <img id="preview" src="#" alt="Image Preview"
+                        style="display:none; width: 300px; height: auto; margin: 0 auto 20px auto;" class="rounded" />
+
+                    <!-- File Upload Form -->
+                    <form action="/submit" method="POST" enctype="multipart/form-data">
+                        <!-- Custom file upload -->
+                        <div class="custom-file overflow-hidden mb-4 text-center">
+                            <input type="file" id="actual-btn" hidden name="image" />
+                            <label for="actual-btn" class="btn btn-outline-success">Choose File</label>
+                            <span id="file-chosen">No file chosen</span>
+                        </div>
+
+                        <h6 class="text-center mb-4 text-muted">
+                            Simply upload your plant's leaf image and then see the magic of AI.
+                        </h6>
+
+                        <!-- Submit Button -->
+                        <center>
+                            <button type="submit" class="btn btn-outline-success">Submit</button>
+                        </center>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col mx-auto">
+                <div class="p-5 bg-white shadow rounded-lg" style="height: 95%;">
+                    <h5><b>Prevent Plant Disease: Follow These Steps:</b></h5>
+                    <ol>
+                        <li>Follow Good Sanitation Practices.</li>
+                        <li>Fertilize to Keep Your Plants Healthy.</li>
+                        <li>Inspect Plants for Diseases Before You Bring Them Home.</li>
+                        <li>Allow the Soil to Warm Before Planting.</li>
+                        <li>Ensure a Healthy Vegetable Garden By Rotating Crops.</li>
+                        <li>Provide Good Air Circulation.</li>
+                        <li>Remove Diseased Stems and Foliage.</li>
+                    </ol>
+                    <a target="_blank" href="https://www.thespruce.com/prevent-plant-diseases-in-your-garden-2539511"
+                        class="mx-2">
+                        <button type="button" class="btn btn-outline-success">More Info</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Image Preview -->
+<script>
+    const actualBtn = document.getElementById('actual-btn');
+    const fileChosen = document.getElementById('file-chosen');
+    const preview = document.getElementById('preview');
+
+    actualBtn.addEventListener('change', function () {
+        const file = this.files[0];
+        fileChosen.textContent = file ? file.name : 'No file chosen';
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.style.display = 'none';
+        }
+    });
+</script>
+
+{% endblock body %}
+</html>
